@@ -63,17 +63,17 @@ class LoginScreen:
 		with child(name='chi', border=False, autosize_x=True, autosize_y=True):
 			add_separator()
 
-			with menu_bar(name='menu'):
+			with menu_bar(name='menu '):
 
-				
 				with menu(name='themes'):
-
-					
 					add_menu_item(parent='themes', name='Classic', callback=theme_setting, callback_data='Classic')
 					add_menu_item(parent='themes', name='Light', callback=theme_setting, callback_data='Light')
 					add_menu_item(parent='themes', name='Dark', callback=theme_setting, callback_data='Dark')
 					add_menu_item(parent='themes', name='Dark 2', callback=theme_setting, callback_data='Dark 2')
 					add_menu_item(parent='themes', name='Cherry', callback=theme_setting, callback_data='Red')
+
+				with menu(name=' options', parent='menu '):
+					add_menu_item(parent=' options', name='style editor', callback=show_style_editor)
 					end()
 
 				add_text('\n\n')
@@ -140,7 +140,25 @@ class LoginScreen:
 				add_same_line(spacing=10)
 				add_button(name='Reduce QC', height=40, callback=qc_downtick)
 				add_separator()
-				# add_same_line(spacing=10)
+
+				add_text('                            \n\n\n')
+				add_text('                              ')
+				add_same_line()
+				def reset():
+					global t1,t2,qc
+					delete_item(f'T1 tickets: {str(t1)}')
+					delete_item(f'T2 tickets: {str(t2)}')
+					delete_item(f'QC tickets: {str(qc)}')
+					t1 = 0
+					t2 = 0
+					qc = 0
+					add_text(f'T1 tickets: {str(t1)}', before=' \n\n')
+					add_text(f'T2 tickets: {str(t2)}', before='   \n\n')
+					add_text(f'QC tickets: {str(qc)}', before='     \n\n')
+
+				add_button('Reset All', small=True, callback=reset)
+
+				
 
 				
 

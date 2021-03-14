@@ -1,9 +1,42 @@
 from dearpygui.core import *
 from dearpygui.simple import *
 
-t1 = 0
-t2 = 0
-qc = 0
+
+try:
+	with open('boolean_check.txt') as checker:
+		reading = checker.readlines()
+		for line in reading:
+			t1=int(line.rstrip())
+except:
+	pass
+
+
+
+try:
+	with open('boolean_check2.txt') as checker2:
+		reading = checker2.readlines()
+		for line in reading:
+			t2=int(line.rstrip())
+except:
+	pass
+
+
+try:
+	with open('boolean_check3.txt') as checker3:
+		reading = checker3.readlines()
+		for line in reading:
+			qc=int(line.rstrip())
+except:
+	pass
+
+
+
+
+a=t1
+b=t2*2
+c=qc
+total = int(a+b+c)
+
 
 
 
@@ -80,16 +113,22 @@ class LoginScreen:
 				add_text(f'T1 tickets: {str(t1)}')
 
 				def t1_tick():
-					global t1
+					global t1, total
 					delete_item(f'T1 tickets: {str(t1)}')
+					delete_item(f'Total: {str(total)}')
 					t1 += 1
+					total += 1
 					add_text(f'T1 tickets: {str(t1)}', before=' \n\n')
+					add_text(f'Total: {str(total)}', before='\n\n\n', color=[255,215,0])
 
 				def t1_downtick():
-					global t1
+					global t1, total
 					delete_item(f'T1 tickets: {str(t1)}')
+					delete_item(f'Total: {str(total)}')
 					t1 -= 1
+					total -= 1
 					add_text(f'T1 tickets: {str(t1)}', before=' \n\n')
+					add_text(f'Total: {str(total)}', before='\n\n\n', color=[255,215,0])
 				
 				add_text(' \n\n')
 				add_button(name='Add T1', width=60, height=40, callback=t1_tick)
@@ -101,16 +140,23 @@ class LoginScreen:
 				add_text(f'T2 tickets: {str(t2)}')
 
 				def t2_tick():
-					global t2
+					global t2, total
 					delete_item(f'T2 tickets: {str(t2)}')
+					delete_item(f'Total: {str(total)}')
 					t2 += 1
+					total += 2
 					add_text(f'T2 tickets: {str(t2)}', before='   \n\n')
+					add_text(f'Total: {str(total)}', before='\n\n\n', color=[255,215,0])
 
 				def t2_downtick():
-					global t2
+					global t2, total
+					delete_item(f'Total: {str(total)}')
 					delete_item(f'T2 tickets: {str(t2)}')
 					t2 -= 1
+					total -= 2
 					add_text(f'T2 tickets: {str(t2)}', before='   \n\n')
+					add_text(f'Total: {str(total)}', before='\n\n\n', color=[255,215,0])
+
 					
 				add_text('   \n\n')
 				add_button(name='Add T2', width=60, height=40, callback=t2_tick)
@@ -123,16 +169,22 @@ class LoginScreen:
 				qc_text = add_text(f'QC tickets: {str(qc)}')
 
 				def qc_tick():
-					global qc
+					global qc, total
+					delete_item(f'Total: {str(total)}')
 					delete_item(f'QC tickets: {str(qc)}')
 					qc += 1
+					total += 1
 					add_text(f'QC tickets: {str(qc)}', before='     \n\n')
+					add_text(f'Total: {str(total)}', before='\n\n\n', color=[255,215,0])
 
 				def qc_downtick():
-					global qc
+					global qc, total
+					delete_item(f'Total: {str(total)}')
 					delete_item(f'QC tickets: {str(qc)}')
 					qc -= 1
+					total -= 1
 					add_text(f'QC tickets: {str(qc)}', before='     \n\n')
+					add_text(f'Total: {str(total)}', before='\n\n\n', color=[255,215,0])
 
 					
 				add_text('     \n\n')
@@ -144,28 +196,44 @@ class LoginScreen:
 				add_text('                            \n\n\n')
 				add_text('                              ')
 				add_same_line()
+
 				def reset():
-					global t1,t2,qc
+					global t1,t2,qc, total
 					delete_item(f'T1 tickets: {str(t1)}')
 					delete_item(f'T2 tickets: {str(t2)}')
 					delete_item(f'QC tickets: {str(qc)}')
+					delete_item(f'Total: {str(total)}')
 					t1 = 0
 					t2 = 0
 					qc = 0
+					total = 0
 					add_text(f'T1 tickets: {str(t1)}', before=' \n\n')
 					add_text(f'T2 tickets: {str(t2)}', before='   \n\n')
 					add_text(f'QC tickets: {str(qc)}', before='     \n\n')
+					add_text(f'Total: {str(total)}', before='\n\n\n', color=[255,215,0])
+
 
 				add_button('Reset All', small=True, callback=reset)
-
 				
+				add_text(f'Total: {str(total)}', color=[255,215,0])
 
+				add_text('\n\n\n')
+
+				# add_separator()
 				
-
-
-# show_style_editor()
 
 if __name__ == '__main__':
 	base = ConstructGui(500, 650)
 	base.builder()
 	base.run_app()
+
+
+
+with open('boolean_check.txt', 'w') as f:
+	f.write(str(t1))
+
+with open('boolean_check2.txt', 'w') as f:
+	f.write(str(t2))
+
+with open('boolean_check3.txt', 'w') as f:
+	f.write(str(qc))

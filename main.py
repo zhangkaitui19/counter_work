@@ -2,6 +2,9 @@ from dearpygui.core import *
 from dearpygui.simple import *
 
 
+###################################################################
+#Load data
+
 try:
 	with open('boolean_check.txt') as checker:
 		reading = checker.readlines()
@@ -29,7 +32,7 @@ try:
 except:
 	pass
 
-
+###################################################################
 
 
 a=t1
@@ -120,6 +123,8 @@ class LoginScreen:
 					total += 1
 					add_text(f'T1 tickets: {str(t1)}', before=' \n\n')
 					add_text(f'Total: {str(total)}', before='\n\n\n', color=[255,215,0])
+					with open('boolean_check.txt', 'w') as f:
+						f.write(str(t1))
 
 				def t1_downtick():
 					global t1, total
@@ -129,6 +134,8 @@ class LoginScreen:
 					total -= 1
 					add_text(f'T1 tickets: {str(t1)}', before=' \n\n')
 					add_text(f'Total: {str(total)}', before='\n\n\n', color=[255,215,0])
+					with open('boolean_check.txt', 'w') as f:
+						f.write(str(t1))
 				
 				add_text(' \n\n')
 				add_button(name='Add T1', width=60, height=40, callback=t1_tick)
@@ -147,6 +154,8 @@ class LoginScreen:
 					total += 2
 					add_text(f'T2 tickets: {str(t2)}', before='   \n\n')
 					add_text(f'Total: {str(total)}', before='\n\n\n', color=[255,215,0])
+					with open('boolean_check2.txt', 'w') as f:
+						f.write(str(t2))
 
 				def t2_downtick():
 					global t2, total
@@ -156,6 +165,8 @@ class LoginScreen:
 					total -= 2
 					add_text(f'T2 tickets: {str(t2)}', before='   \n\n')
 					add_text(f'Total: {str(total)}', before='\n\n\n', color=[255,215,0])
+					with open('boolean_check2.txt', 'w') as f:
+						f.write(str(t2))
 
 					
 				add_text('   \n\n')
@@ -176,6 +187,8 @@ class LoginScreen:
 					total += 1
 					add_text(f'QC tickets: {str(qc)}', before='     \n\n')
 					add_text(f'Total: {str(total)}', before='\n\n\n', color=[255,215,0])
+					with open('boolean_check3.txt', 'w') as f:
+						f.write(str(qc))
 
 				def qc_downtick():
 					global qc, total
@@ -185,6 +198,8 @@ class LoginScreen:
 					total -= 1
 					add_text(f'QC tickets: {str(qc)}', before='     \n\n')
 					add_text(f'Total: {str(total)}', before='\n\n\n', color=[255,215,0])
+					with open('boolean_check3.txt', 'w') as f:
+						f.write(str(qc))
 
 					
 				add_text('     \n\n')
@@ -211,9 +226,16 @@ class LoginScreen:
 					add_text(f'T2 tickets: {str(t2)}', before='   \n\n')
 					add_text(f'QC tickets: {str(qc)}', before='     \n\n')
 					add_text(f'Total: {str(total)}', before='\n\n\n', color=[255,215,0])
+					with open('boolean_check.txt', 'w') as f:
+						f.write(str(t1))
+					with open('boolean_check2.txt', 'w') as f:
+						f.write(str(t2))
+					with open('boolean_check3.txt', 'w') as f:
+						f.write(str(qc))
 
 
 				add_button('Reset All', small=True, callback=reset)
+
 				
 				add_text(f'Total: {str(total)}', color=[255,215,0])
 
@@ -228,6 +250,8 @@ if __name__ == '__main__':
 	base.run_app()
 
 
+#################################################################
+#Save data
 
 with open('boolean_check.txt', 'w') as f:
 	f.write(str(t1))
@@ -237,3 +261,5 @@ with open('boolean_check2.txt', 'w') as f:
 
 with open('boolean_check3.txt', 'w') as f:
 	f.write(str(qc))
+
+#################################################################
